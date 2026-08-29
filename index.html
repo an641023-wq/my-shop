@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마운틴 툴 - 등산 용품 쇼핑몰</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
+
+<style>
+  /* 공통 설정 */
+  body {
+    margin: 0;
+    font-family: "Noto Sans KR", sans-serif;
+    background-color: #1f8549;
+    color: #3B2A20;
+  }
+
+  /* 버튼도 본문과 같은 글씨체를 쓰게 합니다. */
+  button { font-family: inherit; }
+
+  /* 맨 위 (이름 + 소개 + 메뉴) */
+  header {
+    background-color: #C1440E;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  header h1 { margin: 0; font-size: 36px; }
+  header p { margin: 8px 0 20px 0; }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    font-size: 16px;
+  }
+  nav a:hover { text-decoration: underline; }
+
+  /* 큰 배너 */
+  .banner {
+    background-color: #E07A2F;
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+  }
+  .banner h2 { font-size: 30px; margin: 0 0 10px 0; }
+
+  .banner button {
+    background-color: #FFF7EE;
+    color: #C1440E;
+    border: none;
+    padding: 14px 30px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+
+  /* 상품 카드 */
+  h3.title { text-align: center; margin-top: 50px; }
+
+  /* 카테고리 고르는 버튼 */
+  .categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 20px 0 20px;
+  }
+
+  .categories button {
+    background-color: #FFF7EE;
+    color: #C1440E;
+    border: 2px solid #F0DCC8;
+    font-size: 15px;
+    padding: 10px 22px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .categories button:hover { border-color: #C1440E; }
+
+  /* 지금 고른 카테고리 */
+  .categories button.on {
+    background-color: #C1440E;
+    border-color: #C1440E;
+    color: white;
+  }
+
+  .products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .card {
+    position: relative;
+    background-color: white;
+    border: 2px solid #F0DCC8;
+    border-radius: 12px;
+    width: 220px;
+    text-align: center;
+    padding: 20px;
+  }
+  .card .emoji { font-size: 60px; }
+  .card .price { color: #E03131; font-size: 20px; font-weight: bold; }
+  .card .old-price { color: gray; text-decoration: line-through; font-size: 14px; }
+
+  /* 카드 왼쪽 위에 붙는 배지 */
+  .card .badge {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    background-color: #C1440E;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  /* 초보자에게 추천하는 상품 배지 (초록색) */
+  .card .badge.beginner { background-color: #1F8549; }
+
+  /* 할인율 (자바스크립트가 계산해서 넣어줍니다) */
+  .card .discount {
+    color: #E03131;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 6px;
+  }
+
+  .card button {
+    background-color: #C1440E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  /* 맨 아래 연락처 */
+  footer {
+    background-color: #3B2A20;
+    color: #F0DCC8;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+    font-size: 14px;
+  }
+</style>
+</head>
+
+<body>
+
+  <!-- 맨 위 -->
+  <header>
+    <h1>⛰️ 마운틴 툴</h1>
+    <p>산이 부르는 날, 든든한 등산 용품을 준비하세요</p>
+    <nav>
+      <a href="#">홈</a>
+      <a href="#">등산화</a>
+      <a href="#">배낭</a>
+      <a href="#">의류</a>
+    </nav>
+  </header>
+
+  <!-- 큰 배너 -->
+  <div class="banner">
+    <h2>단풍 시즌 가을 산행 준비 세일</h2>
+    <p>인기 상품 최대 40% 할인</p>
+    <button onclick="showAlert('세일 상품 페이지는 준비 중입니다!')">지금 구경하기</button>
+  </div>
+
+  <!-- 상품 카드 -->
+  <h3 class="title">인기 상품</h3>
+
+  <!-- 카테고리 버튼 -->
+  <div class="categories">
+    <button class="on" data-category="전체">전체</button>
+    <button data-category="등산화">등산화</button>
+    <button data-category="배낭">배낭</button>
+    <button data-category="의류">의류</button>
+    <button data-category="장비">장비</button>
+  </div>
+
+  <div class="products">
+
+    <div class="card" data-category="등산화">
+      <div class="emoji">🥾</div>
+      <p>가벼운 등산화</p>
+      <p class="old-price">129,000원</p>
+      <p class="price">89,000원</p>
+      <button onclick="showAlert('가벼운 등산화를 담았습니다!')">장바구니</button>
+    </div>
+
+    <div class="card" data-category="배낭">
+      <div class="emoji">🎒</div>
+      <p>30L 등산 배낭</p>
+      <p class="old-price">98,000원</p>
+      <p class="price">69,000원</p>
+      <button onclick="showAlert('30L 등산 배낭을 담았습니다!')">장바구니</button>
+    </div>
+
+    <div class="card" data-category="의류">
+      <div class="emoji">🧣</div>
+      <p>방풍 등산 자켓</p>
+      <p class="old-price">159,000원</p>
+      <p class="price">99,000원</p>
+      <button onclick="showAlert('방풍 등산 자켓을 담았습니다!')">장바구니</button>
+    </div>
+
+    <div class="card" data-category="의류">
+      <span class="badge">BEST</span>
+      <div class="emoji">🧥</div>
+      <p>등산복 상하 세트</p>
+      <p class="old-price">189,000원</p>
+      <p class="price">129,000원</p>
+      <button onclick="showAlert('등산복 상하 세트를 담았습니다!')">장바구니</button>
+    </div>
+
+    <div class="card" data-category="장비">
+      <div class="emoji">🥢</div>
+      <p>등산 스틱</p>
+      <p class="old-price">59,000원</p>
+      <p class="price">39,000원</p>
+      <button onclick="showAlert('등산 스틱을 담았습니다!')">장바구니</button>
+    </div>
+
+    <div class="card" data-category="장비">
+      <div class="emoji">🧤</div>
+      <p>방한 등산 장갑</p>
+      <p class="old-price">39,000원</p>
+      <p class="price">25,000원</p>
+      <button onclick="showAlert('방한 등산 장갑을 담았습니다!')">장바구니</button>
+    </div>
+
+    <div class="card" data-category="의류">
+      <span class="badge beginner">초보추천</span>
+      <div class="emoji">🧦</div>
+      <p>등산 양말 3켤레 세트</p>
+      <p class="old-price">25,000원</p>
+      <p class="price">15,000원</p>
+      <button onclick="showAlert('등산 양말 3켤레 세트를 담았습니다!')">장바구니</button>
+    </div>
+
+    <div class="card" data-category="의류">
+      <span class="badge beginner">초보추천</span>
+      <div class="emoji">🧢</div>
+      <p>자외선 차단 등산 모자</p>
+      <p class="old-price">45,000원</p>
+      <p class="price">29,000원</p>
+      <button onclick="showAlert('자외선 차단 등산 모자를 담았습니다!')">장바구니</button>
+    </div>
+
+  </div>
+
+  <!-- 맨 아래 -->
+  <footer>
+    <p>마운틴 툴 고객센터</p>
+    <p>전화: 02-123-4567 | 이메일: help@mountaintool.com</p>
+    <p>운영시간: 평일 09:00 ~ 18:00 (주말·공휴일 휴무)</p>
+  </footer>
+
+<script>
+  // 버튼을 누르면 알림창이 뜹니다.
+  function showAlert(message) {
+    alert(message);
+  }
+
+  // 정가와 판매가를 비교해서 할인율을 계산하고 가격 앞에 붙여줍니다.
+  function showDiscounts() {
+    var cards = document.querySelectorAll('.card');
+
+    cards.forEach(function (card) {
+      var oldEl = card.querySelector('.old-price');
+      var priceEl = card.querySelector('.price');
+      if (!oldEl || !priceEl) return;
+
+      // "129,000원" 처럼 적힌 글자에서 숫자만 뽑아냅니다.
+      var oldPrice = Number(oldEl.textContent.replace(/[^0-9]/g, ''));
+      var newPrice = Number(priceEl.textContent.replace(/[^0-9]/g, ''));
+      if (!oldPrice || !newPrice || newPrice >= oldPrice) return;
+
+      var rate = Math.round((1 - newPrice / oldPrice) * 100);
+
+      var badge = document.createElement('span');
+      badge.className = 'discount';
+      badge.textContent = rate + '%';
+      priceEl.prepend(badge);
+    });
+  }
+
+  showDiscounts();
+
+  // 카테고리 버튼을 누르면 그 종류의 상품만 보여줍니다.
+  function setupCategories() {
+    var buttons = document.querySelectorAll('.categories button');
+    var cards = document.querySelectorAll('.card');
+
+    buttons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        // 눌린 버튼에만 색을 칠합니다.
+        buttons.forEach(function (other) {
+          other.classList.remove('on');
+        });
+        button.classList.add('on');
+
+        var picked = button.dataset.category;
+
+        cards.forEach(function (card) {
+          var isMatch = (picked === '전체' || card.dataset.category === picked);
+          card.style.display = isMatch ? '' : 'none';
+        });
+      });
+    });
+  }
+
+  setupCategories();
+</script>
+
+</body>
+</html>
