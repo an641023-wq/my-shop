@@ -9,11 +9,20 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
 
 <style>
+  /* 색상표 (등산 용품점 분위기)
+     짙은 숲색  #2D4739 : 머리말, 장바구니 버튼
+     이끼색     #21332A : 맨 아래 연락처
+     단풍색     #B35A31 : 세일 배너, BEST 배지
+     모래색     #EDE6D8 : 전체 배경
+     사암색     #DBD1BE : 카드 테두리
+     세일빨강   #C93A21 : 가격, 할인율
+     풀색       #4E7C59 : 초보추천 배지            */
+
   /* 공통 설정 */
   body {
     margin: 0;
     font-family: "Noto Sans KR", sans-serif;
-    background-color: #1f8549;
+    background-color: #EDE6D8;
     color: #3B2A20;
   }
 
@@ -22,7 +31,7 @@
 
   /* 맨 위 (이름 + 소개 + 메뉴) */
   header {
-    background-color: #C1440E;
+    background-color: #2D4739;
     color: white;
     text-align: center;
     padding: 30px 20px;
@@ -40,7 +49,7 @@
 
   /* 큰 배너 */
   .banner {
-    background-color: #E07A2F;
+    background-color: #B35A31;
     color: white;
     text-align: center;
     padding: 70px 20px;
@@ -48,8 +57,8 @@
   .banner h2 { font-size: 30px; margin: 0 0 10px 0; }
 
   .banner button {
-    background-color: #FFF7EE;
-    color: #C1440E;
+    background-color: #FBF6EC;
+    color: #B35A31;
     border: none;
     padding: 14px 30px;
     font-size: 16px;
@@ -71,20 +80,20 @@
   }
 
   .categories button {
-    background-color: #FFF7EE;
-    color: #C1440E;
-    border: 2px solid #F0DCC8;
+    background-color: #FBF6EC;
+    color: #2D4739;
+    border: 2px solid #DBD1BE;
     font-size: 15px;
     padding: 10px 22px;
     border-radius: 20px;
     cursor: pointer;
   }
-  .categories button:hover { border-color: #C1440E; }
+  .categories button:hover { border-color: #2D4739; }
 
   /* 지금 고른 카테고리 */
   .categories button.on {
-    background-color: #C1440E;
-    border-color: #C1440E;
+    background-color: #2D4739;
+    border-color: #2D4739;
     color: white;
   }
 
@@ -99,14 +108,14 @@
   .card {
     position: relative;
     background-color: white;
-    border: 2px solid #F0DCC8;
+    border: 2px solid #DBD1BE;
     border-radius: 12px;
     width: 220px;
     text-align: center;
     padding: 20px;
   }
   .card .emoji { font-size: 60px; }
-  .card .price { color: #E03131; font-size: 20px; font-weight: bold; }
+  .card .price { color: #C93A21; font-size: 20px; font-weight: bold; }
   .card .old-price { color: gray; text-decoration: line-through; font-size: 14px; }
 
   /* 카드 왼쪽 위에 붙는 배지 */
@@ -114,7 +123,7 @@
     position: absolute;
     top: -10px;
     left: -10px;
-    background-color: #C1440E;
+    background-color: #B35A31;
     color: white;
     font-size: 13px;
     font-weight: bold;
@@ -123,18 +132,18 @@
   }
 
   /* 초보자에게 추천하는 상품 배지 (초록색) */
-  .card .badge.beginner { background-color: #1F8549; }
+  .card .badge.beginner { background-color: #4E7C59; }
 
   /* 할인율 (자바스크립트가 계산해서 넣어줍니다) */
   .card .discount {
-    color: #E03131;
+    color: #C93A21;
     font-size: 20px;
     font-weight: bold;
     margin-right: 6px;
   }
 
   .card button {
-    background-color: #C1440E;
+    background-color: #2D4739;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -146,7 +155,7 @@
   /* 쇼핑몰 소개 한 줄 */
   .intro {
     text-align: center;
-    color: white;
+    color: #4A5A4E;
     font-size: 18px;
     line-height: 1.7;
     padding: 10px 20px 40px 20px;
@@ -154,8 +163,8 @@
 
   /* 맨 아래 연락처 */
   footer {
-    background-color: #3B2A20;
-    color: #F0DCC8;
+    background-color: #21332A;
+    color: #D7CEBC;
     text-align: center;
     padding: 30px 20px;
     margin-top: 40px;
